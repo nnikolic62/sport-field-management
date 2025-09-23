@@ -13,7 +13,7 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private Long id;
+    private Integer id;
     @Column(name = "username")
     private String username;
     @Column(name = "password")
@@ -26,6 +26,12 @@ public class User {
     public User() {
     }
 
+    public User(String username, String password, UserRole role){
+        this.username = username;
+        this.password = password;
+        this.role = role;
+    }
+
     public User(String username, String password, UserRole role, List<Reservation> reservations) {
         this.username = username;
         this.password = password;
@@ -33,11 +39,11 @@ public class User {
         this.reservations = reservations;
     }
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

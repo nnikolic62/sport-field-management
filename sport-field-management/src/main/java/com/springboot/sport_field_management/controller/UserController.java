@@ -1,6 +1,7 @@
 package com.springboot.sport_field_management.controller;
 
 import com.springboot.sport_field_management.dto.user.UserBasicDTO;
+import com.springboot.sport_field_management.dto.user.UserRegistrationDAO;
 import com.springboot.sport_field_management.entity.User;
 import com.springboot.sport_field_management.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,11 @@ public class UserController {
     @Autowired
     public UserController(UserService userService){
         this.userService = userService;
+    }
+
+    @PostMapping("/register")
+    public ResponseEntity<UserBasicDTO> registerUser(@RequestBody UserRegistrationDAO credentials){
+        return ResponseEntity.ok(userService.register(credentials));
     }
 
     @GetMapping()
