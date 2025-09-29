@@ -1,5 +1,6 @@
 package com.springboot.sport_field_management.controller;
 
+import com.springboot.sport_field_management.dto.user.UserAuthenticationDTO;
 import com.springboot.sport_field_management.dto.user.UserBasicDTO;
 import com.springboot.sport_field_management.dto.user.UserRegistrationDAO;
 import com.springboot.sport_field_management.entity.User;
@@ -19,6 +20,11 @@ public class UserController {
     @Autowired
     public UserController(UserService userService){
         this.userService = userService;
+    }
+
+    @PostMapping("/login")
+    public String login(@RequestBody UserAuthenticationDTO credentials){
+        return userService.login(credentials);
     }
 
     @PostMapping("/register")

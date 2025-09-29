@@ -1,5 +1,6 @@
 package com.springboot.sport_field_management.service;
 
+import com.springboot.sport_field_management.dto.user.UserAuthenticationDTO;
 import com.springboot.sport_field_management.dto.user.UserBasicDTO;
 import com.springboot.sport_field_management.dto.user.UserRegistrationDAO;
 import org.springframework.data.domain.Page;
@@ -9,8 +10,8 @@ import java.util.List;
 
 
 public interface UserService {
-
     UserBasicDTO register(UserRegistrationDAO credentials);
     List<UserBasicDTO> getAllUsers();
     Page<UserBasicDTO> getAllUsers(Pageable pageable);
+    String login(UserAuthenticationDTO credentials);
 }
