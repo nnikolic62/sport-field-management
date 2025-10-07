@@ -12,15 +12,18 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfiguration {
 
     private CustomUserDetailsService customUserDetailsService;
+    private JWTFilter jwtFilter;
     @Autowired
-    public SecurityConfiguration(CustomUserDetailsService customUserDetailsService){
+    public SecurityConfiguration(CustomUserDetailsService customUserDetailsService, JWTFilter jwtFilter){
         this.customUserDetailsService = customUserDetailsService;
+        this.jwtFilter = jwtFilter;
     }
 
     @Bean
@@ -31,6 +34,7 @@ public class SecurityConfiguration {
                         .requestMatchers("/api/users/register", "/api/users/login")
                         .permitAll()
                         .anyRequest().authenticated())
+                .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class) //dodaj jwt filter pre upaf
                 .build();
 
     }
